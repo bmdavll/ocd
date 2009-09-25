@@ -5,13 +5,26 @@
 # Run this script periodically to remove old duplicate commands from your
 # bash history file ($HISTFILE).
 
-my $histfile = $ENV{HISTFILE} || $ARGV[0] or die
-'$HISTFILE not found: check that "export HISTFILE" is in your .bashrc'."\n";
+my @args = grep { $_ !~ /^-/ } @ARGV;
+my @opts = grep { $_ =~ /^-/ } @ARGV;
 
-open HISTFILE, '+<', $histfile or die "$histfile: $!\n";
+my $histfile = $ENV{HISTFILE} || $args[0];
 
-my %seen = ();
-my @unique = reverse grep { not $seen{ $_ }++ } reverse <HISTFILE>;
+-f $histfile or die '$HISTFILE not found', "\n",
+'Check that "export HISTFILE" is in your .bashrc', "\n";
+
+open HISTFILE, '+<', $histfile or die $histfile, ': ', $!, "\n";
+
+my %seen;
+my @unique;
+
+if (grep { $_ eq '--squash' } @opts) {
+    @unique = reverse grep { s/\s+$/\n/;
+                             s/ {2,}/ /g;
+                             not $seen{ $_ }++ } reverse <HISTFILE>;
+} else {
+    @unique = reverse grep { not $seen{ $_ }++ } reverse <HISTFILE>;
+}
 
 truncate HISTFILE, 0;
 seek HISTFILE, 0, 0;

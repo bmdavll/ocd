@@ -11,7 +11,7 @@ function o {
     fi
     prefixes+=("$prefix")
     while true; do
-        if (( ! limit-- )) || [ "$(cd "$prefix" && pwd)" = '/' ]
+        if (( ! limit-- )) || [ "$(cd -P "$prefix" && pwd)" = '/' ]
         then break
         else prefix+='/..' && prefixes+=("$prefix")
         fi
@@ -77,7 +77,7 @@ _o() {
     prefixes+=("$prefix")
     if [ "$cur" -o "$COMP_TYPE" -eq 63 ]; then
         while true; do
-            if (( ! limit-- )) || [ "$(cd "$prefix" && pwd)" = '/' ]
+            if (( ! limit-- )) || [ "$(cd -P "$prefix" && pwd)" = '/' ]
             then break
             else prefix+='/..' && prefixes+=("$prefix")
             fi
