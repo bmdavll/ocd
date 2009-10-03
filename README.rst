@@ -21,7 +21,7 @@ A single ``o`` will take you to the parent directory. It can be followed by
 a count to indicate the number of levels. The default aliases allow you to
 repeat the letter once for every level::
 
-    o     # same as cd ..
+    o -P  # same as cd -P ..
     oo    # same as o 2 or cd ../..
     ooo   # same as o 3
           # etc.
