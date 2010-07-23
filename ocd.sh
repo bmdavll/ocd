@@ -108,9 +108,9 @@ complete -o nospace -o filenames -F _o \
     o oo ooo oooo ooooo oooooo ooooooo oooooooo
 
 
-type cl &>/dev/null && return
+type cdl &>/dev/null && return
 
-function cl {
+function cdl {
     local opts=("$@") args=() arg
     [ ! -r "$HISTFILE" ] && return
 	eval "set -- $(tail -n1 "$HISTFILE" 2>/dev/null | sed 's/[&|!<>$();]//g')"

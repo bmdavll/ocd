@@ -59,12 +59,12 @@ The function will do prefix matching, so for example ``o et`` will change
 your directory to ``/etc``.
 
 
-``cl``
-======
+``cdl``
+=======
 
 This command will try to ``cd`` to a sensible place based on your last
 command, and then ``ls`` there.  For example, each of these commands
-followed by ``cl`` will change your directory to the one named "``foo``"::
+followed by ``cdl`` will change your directory to the one named "``foo``"::
 
     ls /usr/share/foo
     sudo mount /dev/sdb1 /media/foo
@@ -83,7 +83,7 @@ Add this line to your ``.bashrc`` if it doesn't work::
 
 You can also specifiy options to ``ls``::
 
-    cl -lA
+    cdl -lA
 
 
 Install
@@ -101,18 +101,18 @@ Tips
 * You can direct ``bash`` to skip adding these commands to the history file
   by setting ``HISTIGNORE`` in your ``.bashrc``::
 
-      HISTIGNORE+=':cl:o'
+      HISTIGNORE+=':cdl:o'
 
   Or, if you have extended globbing turned on (``shopt -s extglob``)::
 
-      HISTIGNORE+=':cl:o*(o)'
+      HISTIGNORE+=':cdl:o*(o)'
 
 * To quickly go up one or more directory levels under the default key
   bindings, use ``o<C-o>``, ``oo<C-o>``, etc.
 
-* You can bind ``cl`` to a key in your readline config (``.inputrc``)::
+* You can bind ``cdl`` to a key in your readline config (``.inputrc``)::
 
-      "\C-g": "\C-a\C-kcl\C-m"  # bind cl to Ctrl-g
+      "\C-g": "\C-a\C-kcdl\C-m"  # bind cdl to Ctrl-g
       # to bind to Alt-g instead, change "\C-g" to "\eg" or "M-g"
 
 * Check out other ``cd`` utilities like rupa's j_ or joelthelion's autojump_.
