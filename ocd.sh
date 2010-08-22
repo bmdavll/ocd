@@ -112,8 +112,7 @@ type cdl &>/dev/null && return
 
 function cdl {
     local opts=("$@") args=() arg
-    [ ! -r "$HISTFILE" ] && return
-	eval "set -- $(tail -n1 "$HISTFILE" 2>/dev/null | sed 's/[&|!<>$();]//g')"
+    eval "set -- $(history -p '!!' | sed 's/[&|!<>$();]//g')"
     while [ $# -gt 0 ]; do
         args[$#]="$1" && shift
     done

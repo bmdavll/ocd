@@ -63,8 +63,8 @@ your directory to ``/etc``.
 =======
 
 This command will try to ``cd`` to a sensible place based on your last
-command, and then ``ls`` there.  For example, each of these commands
-followed by ``cdl`` will change your directory to the one named "``foo``"::
+command, and then ``ls`` there. For example, each of these commands followed
+by ``cdl`` will change your directory to the one named "``foo``"::
 
     ls /usr/share/foo
     sudo mount /dev/sdb1 /media/foo
@@ -73,15 +73,9 @@ followed by ``cdl`` will change your directory to the one named "``foo``"::
     find foo -type f | cut -c 5-
     sort -u lines > foo/out
 
-It does this by reading the last line from your ``$HISTFILE``, stripping
-shell metacharacters from it, and then checking each argument in reverse
-order. This requires that ``bash`` update the history file after each
-command, so make sure "``history -a``" is part of your ``$PROMPT_COMMAND``.
-Add this line to your ``.bashrc`` if it doesn't work::
-
-    PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
-
-You can also specifiy options to ``ls``::
+This is accomplished by retrieving the last command line from history,
+stripping shell metacharacters from it, and then checking each argument in
+reverse order for directories. You can also specifiy options to ``ls``::
 
     cdl -lA
 
